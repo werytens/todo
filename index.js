@@ -12,12 +12,6 @@ let names = [
 let activeUserId;
 
 
-document.querySelector(".test").addEventListener("click", () => {
-
-    console.log(localStorage)
-})
-
-
 const worksButtons = document.querySelectorAll(".work__buttons")
 
 worksButtons.forEach(button => button.addEventListener("click", (event) => {
