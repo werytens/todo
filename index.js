@@ -37,7 +37,6 @@ worksButtons.forEach(button => button.addEventListener("click", (event) => {
     }
 }));
 
-
 document.addEventListener("DOMContentLoaded", (event) => {
     if (JSON.parse(localStorage.getItem(0)) == null) {
         let startItems = {
@@ -55,9 +54,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
             pageCreating(event, localData[index].name, localData[index].done, itemsfield, forminput, activeUserId)
         }
     }
+
+    frombutton.disabled = true
 })
 
-
+forminput.addEventListener("click", () => {
+    frombutton.disabled = false
+})
 
 frombutton.addEventListener("click", (event) => {
     event.preventDefault()
