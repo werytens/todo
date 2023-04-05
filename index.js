@@ -1,88 +1,64 @@
-import { clearingItems } from './modules/clearingItems.js';
-import { pageCreating } from "./modules/pageCreating.js"
-import { setTitle } from "./modules/setTitle.js"
-import { changeUserID } from "./modules/changeUserId.js"
-import { savingItems } from "./modules/savingItems.js"
+import { createTodo } from "./modules/createTask.js";
+import { setTitle } from "./modules/setTitle.js";
+import { savingInLocalStorage } from "./modules/savingItems.js";
+import { clearItems } from "./modules/clearItems.js";
 
-let frombutton = document.getElementById('frombtn')
-let itemsfield = document.querySelector(".listelem")
-let forminput = document.getElementById('frominp')
+const allTaskButtons = document.querySelectorAll(".task__button");
+const input = document.querySelector(".if__input");
+const button = document.querySelector(".if__button");
+const users = ["My", "Mom", "Dad"];
 
-let names = [
-    {name: "Максима", id: "0"},
-    {name: "Мамы", id: "1"},
-    {name: "Папы", id: "2"}
-] 
+let userID;
 
+const defaultTasks = [{
+    name: "Create #TODO",
+    done: "done"
+}, {
+    name: "Dont Create #TODO", done: "undone"
+}];
 
-let activeUserId = 0;
+document.addEventListener("DOMContentLoaded", () => {
+    setTitle("My");
 
-let worksButtons = document.querySelectorAll(".work__buttons")
+    button.disabled = true;
+    userID = 0;
 
-worksButtons.forEach(button => button.addEventListener("click", (event) => {
-    setTitle(button.innerHTML)
-    clearingItems()
-
-    activeUserId = changeUserID(button.innerHTML.slice(7), names)
-
-    let localData = JSON.parse(localStorage.getItem(activeUserId))
-
-    if (localData == null) {
-        console.log("У выбранного пользователя нет данных")
-        return
+    if (JSON.parse(localStorage.getItem(userID)) == null) {
+        defaultTasks.forEach(task => {createTodo(task.name, task.done, userID)});
+    } else {
+        JSON.parse(localStorage.getItem(userID)).forEach(item => {createTodo(item.name, item.done, userID)});
     }
+});
 
-    for (let index = 0; index < localData.length; index++) {
-        pageCreating(event, localData[index].name, localData[index].done, itemsfield, forminput, activeUserId)
+button.addEventListener("click", (event) => {
+    event.preventDefault()
+
+    createTodo(input.value, "undone", userID);
+
+    input.value = "";
+    button.disabled = true;
+
+    savingInLocalStorage(userID);
+});
+
+input.addEventListener("input", () => {button.disabled = false;});
+
+allTaskButtons.forEach(button => button.addEventListener("click", () => {
+    setTitle(button.innerHTML);
+    clearItems();
+    userID = users.indexOf(button.innerHTML);
+
+    if (JSON.parse(localStorage.getItem(userID)) != null) {
+        JSON.parse(localStorage.getItem(userID)).forEach(item => {createTodo(item.name, item.done, userID)});   
     }
 }));
 
-document.addEventListener("DOMContentLoaded", (event) => {
-    if (JSON.parse(localStorage.getItem(0)) == null) {
-        let startItems = {
-            name: "Доделать TODO",
-            done: true
-        }
-
-        setTitle("Задачи Максима")
-        pageCreating(event, startItems.name, startItems.done, itemsfield, forminput, activeUserId)
-    } else {
-        setTitle("Задачи Максима")
-        let localData = JSON.parse(localStorage.getItem(0))
-
-        for (let index = 0; index < localData.length; index++) {
-            pageCreating(event, localData[index].name, localData[index].done, itemsfield, forminput, activeUserId)
-        }
-    }
-
-    frombutton.disabled = true
+document.querySelector(".delete__completed").addEventListener("click", () => {
+    if (confirm("Вы уверены?") == false) {return}
+    document.querySelectorAll(".task__element").forEach(task => { task.dataset.done == "done" ? task.remove() : null; savingInLocalStorage(userID); })
 })
 
-forminput.addEventListener("click", () => {
-    frombutton.disabled = false
-})
-
-frombutton.addEventListener("click", (event) => {
-    event.preventDefault()
-
-    pageCreating(event, forminput.value, false, itemsfield, forminput, activeUserId)
-});
-
-frombutton.addEventListener("click", () => {
-    setTimeout(() => { savingItems(activeUserId) }, 100);
-})
-
-
-// Очистка локального хранилища
-
-document.getElementById("clear").addEventListener("click", () => {
-    localStorage.clear()
-
-    let clearBTN = document.getElementById("clear");
-
-    clearBTN.innerHTML = "Очищено";
-    console.log("Было очищено локальное хранилище")
-    clearBTN.style.color = "red";
-
-    setTimeout(() => {clearBTN.innerHTML = "Очистить"; clearBTN.style.color = "black";}, 3000);
+document.querySelector(".delete__all").addEventListener("click", () => {
+    if (confirm("Вы уверены?") == false) {return}
+    document.querySelectorAll(".task__element").forEach(task => { task.remove(); savingInLocalStorage(userID); })
 })
