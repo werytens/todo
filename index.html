@@ -4,37 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo</title>
-    <link rel="stylesheet" href="./index.css">
-    <script src="./index.js" defer></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <title> TODO LIST </title>
+
+    <link rel="stylesheet" href="index.css">
+    <script src = "index.js" defer type="module"></script>
 </head>
 <body>
-    <section class="todo">
-        <h1 class = 'title'>
-            Задачи Мамы
-        </h1>
+    <div class="container">
+        
+        <section class="todo__block">
 
-        <div class = "works__button">
-            <button class = "work__buttons work_max" >Задачи Максима</button>
-            <button class = "work__buttons work_mom" >Задачи Мамы</button>
-            <button class = "work__buttons work__dad" >Задачи Папы</button>
-        </div>
+            <p class="title"></p>
 
-        <form>
-            <input id = "frominp" placeholder="Введите вашу задачу">
-            <button id = "frombtn">Добавить запись</button>
-        </form>
-        <div id = "list">
-            <div class="listelem">
+            <div class="buttons">
+                <button class = "task__button buttontask__my">My</button>
+                <button class = "task__button buttontask__mom">Mom</button>
+                <button class = "task__button buttontask__dad">Dad</button>
             </div>
-        </div>
 
-        <div class="clear">
-            <button id = "clear">Очистить</button>
-        </div>
-    </section>
+            <form action="" class="input__field">
+                <input type="text" class="if__input" placeholder="Input Task">
+                <button class="if__button">Create Task</button>
+            </form>
+
+            <div class="active__buttons">
+                <button class = "delete__completed">Delete Completed</button>
+                <button class = "delete__all">Delete All</button>
+            </div>
+
+            <div class="task__list"></div>
+
+        </section>
+
+    </div>
 </body>
 </html>
