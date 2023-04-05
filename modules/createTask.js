@@ -34,4 +34,3 @@ function createButtons(taskButtons, userID) {
 
     manageTask(buttonDone, buttonDelete, userID);
 }
-
