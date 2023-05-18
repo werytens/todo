@@ -1,4 +1,3 @@
-import { savingInLocalStorage } from "./savingItems.js";
 import { deleteItem, changeItem } from "./fetchFunctions.js";
 
 export function manageTask(buttonDone, buttonDelete, ID) {

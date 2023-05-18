@@ -1,8 +1,7 @@
 import { createTodo } from "./modules/createTask.js";
 import { setTitle } from "./modules/setTitle.js";
-import { savingInLocalStorage } from "./modules/savingItems.js";
 import { clearItems } from "./modules/clearItems.js";
-import { addItemToServer, checkAllItems, deleteItem, changeItem } from "./modules/fetchFunctions.js";
+import { addItemToServer, checkAllItems } from "./modules/fetchFunctions.js";
 
 const allTaskButtons = document.querySelectorAll(".task__button");
 const input = document.querySelector(".if__input");
