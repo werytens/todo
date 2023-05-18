@@ -5,6 +5,11 @@ export function createTodo(text, done, userID) {
 
     let div = document.createElement('div');
     div.classList.add("task__element");
+
+    if (done == true) {
+        done = "done"
+    }
+
     div.dataset["done"] = done; 
     if (done == "done") { div.style.cssText = "color: var(--text-first); text-decoration: underline; transition: 1s;" }
     taskList.append(div);

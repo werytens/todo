@@ -2,7 +2,7 @@ import { createTodo } from "./modules/createTask.js";
 import { setTitle } from "./modules/setTitle.js";
 import { savingInLocalStorage } from "./modules/savingItems.js";
 import { clearItems } from "./modules/clearItems.js";
-import { addItemToServer, checkAllItems } from "./modules/fetchFunctions.js";
+import { addItemToServer, checkAllItems, deleteItem, changeItem } from "./modules/fetchFunctions.js";
 
 const allTaskButtons = document.querySelectorAll(".task__button");
 const input = document.querySelector(".if__input");
@@ -20,14 +20,6 @@ const defaultTasks = [{
 }];
 
 document.addEventListener("DOMContentLoaded", async () => {
-    document.querySelector(".test").addEventListener("click", async (event) => {
-        // await addItemToServer("test", "my", false);
-        
-        let allItems = await checkAllItems();
-        allItems.forEach(item => { console.log(item); })
-    })
-    
-
     setTitle("My");
 
     button.disabled = true;
@@ -89,12 +81,14 @@ allTaskButtons.forEach(button => button.addEventListener("click", async() => {
     }
 }));
 
-document.querySelector(".delete__completed").addEventListener("click", () => {
-    if (confirm("Вы уверены?") == false) {return}
-    document.querySelectorAll(".task__element").forEach(task => { task.dataset.done == "done" ? task.remove() : null; savingInLocalStorage(userID); })
-})
+// document.querySelector(".delete__completed").addEventListener("click", () => {
+    // deleteItem();
 
-document.querySelector(".delete__all").addEventListener("click", () => {
-    if (confirm("Вы уверены?") == false) {return}
-    document.querySelectorAll(".task__element").forEach(task => { task.remove(); savingInLocalStorage(userID); })
-})
+    // if (confirm("Вы уверены?") == false) {return}
+    // document.querySelectorAll(".task__element").forEach(task => { task.dataset.done == "done" ? task.remove() : null; savingInLocalStorage(userID); })
+// })
+
+// document.querySelector(".delete__all").addEventListener("click", () => {
+//     if (confirm("Вы уверены?") == false) {return}
+//     document.querySelectorAll(".task__element").forEach(task => { task.remove(); savingInLocalStorage(userID); })
+// })

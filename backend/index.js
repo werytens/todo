@@ -136,6 +136,10 @@ function deleteTodoItem(itemId) {
 // создаём новый файл с базой данных, если он не существует
 if (!existsSync(DB_FILE)) writeFileSync(DB_FILE, '[]', { encoding: 'utf8' });
 
+function testFunction(query) {
+    console.log(query)
+}
+
 // создаём HTTP сервер, переданная функция будет реагировать на все запросы к нему
 createServer(async (req, res) => {
   
@@ -184,10 +188,10 @@ createServer(async (req, res) => {
             // /api/todos
             if (req.method === 'GET') return getTodoList(queryParams);
             if (req.method === 'POST') {
-            const newTodoItem = createTodoItem(await drainJson(req));
-            res.statusCode = 201;
-            res.setHeader('Location', `${URI_PREFIX}/${newTodoItem.id}`);
-            return newTodoItem;
+                const newTodoItem = createTodoItem(await drainJson(req));
+                res.statusCode = 201;
+                res.setHeader('Location', `${URI_PREFIX}/${newTodoItem.id}`);
+                return newTodoItem;
             }
         } else {
             // /api/todos/{id}
