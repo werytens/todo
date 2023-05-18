@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <title> TODO LIST </title>
+
+    <link rel="stylesheet" href="index.css">
+    <script src = "index.js" defer type="module"></script>
+</head>
+<body>
+    <div class="container">
+        
+        <section class="todo__block">
+
+            <p class="title"></p>
+
+            <div class="buttons">
+                <button class = "task__button buttontask__my">My</button>
+                <button class = "task__button buttontask__mom">Mom</button>
+                <button class = "task__button buttontask__dad">Dad</button>
+            </div>
+
+            <form action="" class="input__field">
+                <input type="text" class="if__input" placeholder="Input Task">
+                <button class="if__button">Create Task</button>
+            </form>
+
+            <div class="active__buttons">
+                <button class = "delete__completed">Delete Completed</button>
+                <button class = "delete__all">Delete All</button>
+            </div>
+
+            <div class="task__list"></div>
+
+        </section>
+
+    </div>
+</body>
+</html>
